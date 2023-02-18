@@ -29,7 +29,6 @@ vim.opt.updatetime = 50
 vim.opt.timeoutlen = 100
 
 vim.opt.colorcolumn = "80"
-vim.opt.clipboard = "unnamedplus"
 
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
