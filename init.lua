@@ -26,7 +26,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
-vim.opt.timeoutlen = 100
+vim.opt.timeoutlen = 300
 
 vim.opt.colorcolumn = "80"
 
@@ -86,12 +86,12 @@ require("lazy").setup({
             require("mini.comment").setup()
         end,
     },
-		--   {
-		--       'vladdoster/remember.nvim',
-		-- config = function()
-		-- 	require('remember')
-		-- end
-		--   },
+    {
+        'vladdoster/remember.nvim',
+        config = function()
+            require('remember')
+        end
+    },
     -- TreeSitter
     {
         "nvim-treesitter/nvim-treesitter",
@@ -107,8 +107,7 @@ require("lazy").setup({
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
-    -- LSP Support 
-    -- TODO: Finish the setup
+    -- LSP Support
     {
         'neovim/nvim-lspconfig',
     },
