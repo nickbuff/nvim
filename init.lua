@@ -35,9 +35,9 @@ vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
 
--- vim.keymap.set("i", "kj", "<esc>")
--- vim.keymap.set("i", "jj", "<esc>")
--- vim.keymap.set("i", "kj", "<esc>")
+vim.keymap.set("i", "kj", "<esc>")
+vim.keymap.set("i", "jj", "<esc>")
+vim.keymap.set("i", "kj", "<esc>")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -59,66 +59,39 @@ vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git", "clone", "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
+        lazypath
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-    -- Themes
-	{
-		'navarasu/onedark.nvim',
-		config = function()
-			require('onedark').load()
-        end
-    },
-    -- Editing
+require("lazy").setup({ -- Themes
+    {'navarasu/onedark.nvim', config = function() require('onedark').load() end}, -- Editing
     {
         "echasnovski/mini.comment",
         event = "VeryLazy",
-        config = function()
-            require("mini.comment").setup()
-        end,
-    },
-    {
-        'vladdoster/remember.nvim',
-        config = function()
-            require('remember')
-        end
-    },
-    -- TreeSitter
+        config = function() require("mini.comment").setup() end
+    }, -- Remember
+    {'vladdoster/remember.nvim', config = function() require('remember') end}, -- TreeSitter
     {
         "nvim-treesitter/nvim-treesitter",
         version = false,
         build = ":TSUpdate",
         event = "BufReadPost",
         opts = {
-            highlight = { enable = true },
-            indent = { enable = true },
-            context_commentstring = { enable = true, enable_autocmd = false },
+            highlight = {enable = true},
+            indent = {enable = true},
+            context_commentstring = {enable = true, enable_autocmd = false}
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
-        end,
-    },
-    -- LSP Support
-    {
-        'neovim/nvim-lspconfig',
-    },
+        end
+    }, -- LSP Support
+    {'neovim/nvim-lspconfig'},
     {
         'williamboman/mason.nvim',
-        config = function()
-            require("mason").setup()
-        end
-    },
-    {
-        'williamboman/mason-lspconfig.nvim'
-    },
-
+        config = function() require("mason").setup() end
+    }, {'williamboman/mason-lspconfig.nvim'}
 })
